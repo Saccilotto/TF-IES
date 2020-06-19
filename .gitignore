@@ -2,9 +2,19 @@
 *.class
 
 # eclipse project file
-.settings/
 .classpath
 .project
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
 
 # Log file
 *.log
