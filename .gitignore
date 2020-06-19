@@ -7,6 +7,7 @@
 .metadata
 bin/
 tmp/
+*.lock
 *.tmp
 *.bak
 *.swp
