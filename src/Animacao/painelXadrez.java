@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class Xadrez extends Application{
+public class painelXadrez extends Application{
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -26,17 +26,21 @@ public class Xadrez extends Application{
 		root.setPadding(new Insets(25,25,25,25));
 		//root.setGridLinesVisible(true);
 		
+		//criacao de caixas horizontais pra armazenar botoes e texto, respectivamente.
 		HBox hbBut = new HBox();
 		HBox hbText = new HBox();
-			
+		
+		//Edicao da caixa horizontal de texto
 		hbText.setAlignment(Pos.CENTER);
 		Text login = new Text("Bem Vindo à Chess Battles!");
 		login.setFont(Font.font("Tahoma",FontWeight.EXTRA_BOLD,35));
 		hbText.getChildren().add(login);
 		root.add(hbText,0,0);
-
+		
+		//Edicao da caixa horizontal de botoes
 		hbBut.setAlignment(Pos.BOTTOM_CENTER);
 		hbBut.setSpacing(100);
+		//botao jogar deve disparar uma nova cena onde o jogo comecara.(a fazer)
 		Button butJogar = new Button("Jogar");
 		butJogar.autosize();
 		hbBut.getChildren().add(butJogar);				
