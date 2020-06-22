@@ -37,7 +37,7 @@ public class painelXadrez extends Application{
 		hbText.getChildren().add(login);
 		root.add(hbText,0,0);
 		
-		//Edicao da caixa horizontal de botoes
+		//Edicao da caixa horizontal de botoes.
 		hbBut.setAlignment(Pos.BOTTOM_CENTER);
 		hbBut.setSpacing(100);
 		//botao jogar deve disparar uma nova cena onde o jogo comecara.(a fazer)
