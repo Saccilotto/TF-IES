@@ -13,11 +13,16 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-public class painelXadrez extends Application{
+
+public class Xadrez extends Application{
 	private Stage primaryStage;	
-
+	
 	//acessa o jogo a partir do botao "Jogar"
 	private void disparaJogo() {
 		System.out.println("botao Jogar");
@@ -25,24 +30,20 @@ public class painelXadrez extends Application{
 	
 	//fecha o jogo a partir do botao "Sair"
 	private void saidaJogo() {
-		stop();		
+		stop();	
 	}
 	
-	@Override
-	public void init() {	
-		
-	}
-		
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		
 		//criacao de gerenciador de layout Flowpane :
-		FlowPane root = new FlowPane();		
+		FlowPane root = new FlowPane();
 		root.setPadding(new Insets(25,25,25,25));		
-		root.setAlignment(Pos.CENTER);
+		root.setAlignment(Pos.CENTER);		
 		root.setHgap(10);
 		root.setVgap(10);
+		root.setStyle("-fx-background-color: aquamarine; -fx-text-fill: aquamarine;");
 		
 		//criacao de caixas horizontais pra armazenar botoes e texto, respectivamente:
 		HBox hbBut = new HBox();
@@ -71,11 +72,13 @@ public class painelXadrez extends Application{
 		root.getChildren().add(hbBut);
 		
 		
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root);	
+		//primaryStage.getIcons().add(());						
 		primaryStage.setTitle("Chess Battles");
 		primaryStage.setScene(scene);				
 		primaryStage.show();
 	}
+	
 	
 	public void stop() {
 		primaryStage.close();
