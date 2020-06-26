@@ -1,5 +1,15 @@
 package Animacao;
+
+
+import java.io.File;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.text.Font;
@@ -12,17 +22,55 @@ import javafx.scene.layout.HBox;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 
 public class Xadrez extends Application{		
 	private Stage primaryStage;
 	
+	private void setIcons(Stage st) {
+		  ObservableList<Image> icons = st.getIcons();
+		  
+		  final String dir = "icones/";
+		  //final String fileInit = "ic";
+		  
+		  ArrayList<Image> ic = new ArrayList<Image>();					
+		  
+		  File folder = new File(dir);
+		  File[] icones = folder.listFiles();
+		  
+		  ArrayList<String> paths = new ArrayList<String>();  		  
+		  for (File f:icones) {
+				String fileName = f.getName();
+				//Image imagem = new Image(fileName);	
+				//ic.add(imagem);	
+				paths.add(fileName);
+		  		}
+		  
+		  // List<String> imageNames
+		  List<String> imageNames = Arrays.asList();
+		  List<Image> images = imageNames.stream()
+		                  .map(s -> dir + s)
+		                  .map(s -> getClass().getResourceAsStream(s))
+		                  .filter(Objects::nonNull)
+		                  .map(Image::new)
+		                  .collect(Collectors.toList());
+		  icons.addAll(images);
+		  
+		  
+	  st.getIcons().addAll();  
+	}
+	
     @Override
     public void start(Stage primaryStage) {
+    	
     	//metodo de Configuracao do palco
         configura(primaryStage);
 	}
+    
+    
 	
 	public void configura(Stage primaryStage){
 		this.primaryStage = primaryStage;
@@ -56,22 +104,15 @@ public class Xadrez extends Application{
 		
 		//botao sair fecha a janela inicial e termina o jogo:
 		Button butSair = new Button("Sair");
-		/*
-		EventHandler e = new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				Platform.exit();
-			}	
-		butSair.setOnActione(e));
-		*/
 		butSair.setOnAction(e->saidaJogo());
 		hbBut.getChildren().add(butSair);		
 		//adiciona o hbBut configrado com dois botoes ao Flowpane.
 		root.getChildren().add(hbBut);
 					
 		Scene scene = new Scene(root);	
-		//adiconar icones a janela:
-		//primaryStage.getIcons().add(());						
+		//adiconar icones da janela:		
+		//primaryStage.getIcons.addIcons("C:\\Users\\Andre\\Desktop\\TF-IES\\src\\Animacao\\icones","ic"))
+		setIcons(primaryStage);
 		primaryStage.setTitle("Chess Battles");
 		primaryStage.setScene(scene);				
 		primaryStage.show();
@@ -108,7 +149,9 @@ public class Xadrez extends Application{
         }
         */
         
-        // Monta a cena e exibe        
+        // Monta a cena e exibe 
+
+        
         Scene scene = new Scene(grid);
         st.setScene(scene);
         st.show();
