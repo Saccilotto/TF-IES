@@ -29,7 +29,7 @@ public class Sprite {
 	
 	private void setImage(Image img) {
 		try {
-			img = ImageIO.read(getClass().getResource("/images/" + imgFile.getName() + ".jpg"));
+			img = ImageIO.read(getClass().getResource("/images/" + imgFile.getName()));
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}
