@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.Vector;
 
-class Rook extends Piece {
+public class Rook extends Piece {
 	public Rook(boolean c) {
 		super(c);
 		setValue(5);

@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Vector;
 
-class Knight extends Piece {
+public class Knight extends Piece {
 	public Knight(boolean c) {
 		super(c);
 		setValue(3);

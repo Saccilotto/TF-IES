@@ -2,7 +2,7 @@ package main.java.model;
 
 import java.util.Vector;
 
-class Bishop extends Piece {
+public class Bishop extends Piece {
 	public Bishop(boolean c) {
 		super(c);
 		setValue(3);

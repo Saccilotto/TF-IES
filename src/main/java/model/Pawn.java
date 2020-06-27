@@ -2,7 +2,7 @@ package main.java.model;
 
 import java.util.Vector;
 
-class Pawn extends Piece {
+public class Pawn extends Piece {
 	public Pawn(boolean c) {
 		super(c);
 		setValue(1);
