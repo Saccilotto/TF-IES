@@ -2,12 +2,16 @@ package main.java.model;
 
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.Vector;
+import java.util.List;
+
+import main.java.gui.Jogo;
 
 public abstract class Piece {
 	public final static boolean WHITE = true;
 	public final static boolean BLACK = false;
+	public static Jogo game;
 
+	private static Piece instance;
 	private boolean color;
 	private int value;
 
@@ -20,10 +24,10 @@ public abstract class Piece {
 	 * getLegalMoves does not test for checks. Therefore, the calling statement
 	 * should filter the moves through an isCheck() function
 	 */
-	abstract public Vector getLegalMoves(Point from, ChessBoard b);
+	abstract List getLegalMoves(Point from, Jogo game);
 
 	/* draw a piece given the lower left corner of the square */
-	abstract public void drawPiece(int x, int y, Graphics g);
+	public abstract void drawPiece(int x, int y, Graphics g);
 
 	public boolean getColor() {
 		return color;

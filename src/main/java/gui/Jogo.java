@@ -1,9 +1,9 @@
 package main.java.gui;
 
+import java.awt.Insets;
 import java.util.ResourceBundle.Control;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

@@ -1,23 +1,27 @@
 package main.java.model;
 
 import java.awt.Point;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
+import main.java.gui.Jogo;
 
 public class King extends Piece {
 
 	public King(boolean c) {
 		super(c);
+		Jogo g = super.game;
 		setValue(1000);
 	}
 
 	@Override
-	public Vector getLegalMoves(Point from, ChessBoard b) {
-		Vector v = new Vector();
+	public List getLegalMoves(Point from, Jogo g) {
+		List<Point> v = new ArrayList<Point>();
 		int dx, dy;
 		Point tempPoint = new Point();
 
 		/* Check for castling */
-		if (b.canCastle(b.getTurn(), 'Q'))
+		if (g.canCastle(g.getTurn(), 'Q'))
 			v.addElement(new Move(from, new Point(from.rank, 2), 'Q'));
 
 		if (b.canCastle(b.getTurn(), 'K'))
