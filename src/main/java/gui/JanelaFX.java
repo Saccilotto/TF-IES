@@ -3,6 +3,7 @@ package main.java.gui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import main.resources.Icons;
 
 public class JanelaFX extends Application {
 
@@ -16,9 +17,12 @@ public class JanelaFX extends Application {
 	}
 
 	private void setup() {
-		menu = Menu.getInstance();
+		Icons icons = Icons.getInstance();
+
+		mainStage.getIcons().add(icons.getMainIcon());
 		mainStage.setTitle("Chess Battles");
 
+		menu = Menu.getInstance();
 		setScene(menu.getScene());
 	}
 
