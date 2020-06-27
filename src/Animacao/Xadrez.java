@@ -99,7 +99,7 @@ public class Xadrez extends Application{
 					
 		Scene scene = new Scene(root);	
 		//adiconar icones da janela:		
-		setIcons(st);
+		//setIcons(st);
 		st.setTitle("Chess Battles");
 		st.setScene(scene);				
 		st.show();

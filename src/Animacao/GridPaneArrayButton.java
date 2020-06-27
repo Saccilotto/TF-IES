@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-public class GridPaneArrayButton extends Application {	
+public class GridPaneArrayButton extends Application  {	
 	private Position p;
 	
     @Override
@@ -67,75 +67,39 @@ public class GridPaneArrayButton extends Application {
                 btn[i][j].setPrefSize(65, 65);
                 root.add(btn[i][j], j, i + 2);
                 
-                
-                btn[i][j].setOnMouseClicked((MouseEvent e) -> {
+              	btn[i][j].setOnMouseClicked((MouseEvent e) -> {
+                StringBuilder str = new StringBuilder();
 
-                    StringBuilder str = new StringBuilder();
+                str.append("Position Gridpane X: ").append(e.getX()).append("\n");
+                str.append("Position Gridpane Y: ").append(e.getY()).append("\n");
 
-                    str.append("Position Gridpane X: ").append(e.getX()).append("\n");
-                    str.append("Position Gridpane Y: ").append(e.getY()).append("\n");
+                int x = (int) e.getX();
+                int y = (int) e.getY();
 
-                    int x = (int) e.getX();
-                    int y = (int) e.getY();
+                int rx = ((int) e.getX() % 8);
+                int ry = ((int) e.getY() % 8);
 
-                    int rx = ((int) e.getX() % 8);
-                    int ry = ((int) e.getY() % 8);
+                int lin = (x - rx) / 8;
+                int col = (y - ry) / 8;
 
-                    int lin = (x - rx) / 8;
-                    int col = (y - ry) / 8;
+                str.append("Line X: ").append(lin).append("\n");
+                str.append("Col Y: ").append(convCol(col)).append("\n");
+                str.append("Position XY : ").append(new Position(lin, convCol(col))).append("\n");
+                str.append("\n-----------------------------------------------------------------------------\n\n");
 
-                    str.append("Line X: ").append(lin).append("\n");
-                    str.append("Col Y: ").append(convCol(col)).append("\n");
-                    str.append("Position XY : ").append(new Position(lin, convCol(col))).append("\n");
-                    str.append("\n-----------------------------------------------------------------------------\n\n");
-
-                    text.appendText(str.toString());
-                });
-                
-                /*
-                btn[i][j].setOnMouseClicked((MouseEvent e) -> {
-
-                    StringBuilder str = new StringBuilder();
-
-                    str.append("Position Gridpane X: ").append(e.getX()).append("\n");
-                    str.append("Position Gridpane Y: ").append(e.getY()).append("\n");
-
-                    int x = (int) e.getX();
-                    int y = (int) e.getY();
-
-                    int rx = ((int) e.getX() % 8);
-                    int ry = ((int) e.getY() % 8);
-
-                    int lin = (x - rx) / 8;
-                    int col = (y - ry) / 8;
-
-                    str.append("Line X: ").append(lin).append("\n");
-                    str.append("Col Y: ").append(convCol(col)).append("\n");
-                    str.append("Position XY : ").append(new Position(lin, convCol(col))).append("\n");
-                    str.append("\n-----------------------------------------------------------------------------\n\n");
-
-                    text.appendText(str.toString());
-                });
-                ******************************************************************************    
-                //btn[i][j].setUserData( new Position( btn.length - i, convCol( j + 1 ) ) );          
-                btn[i][j].setOnMouseClicked(( MouseEvent e ) -> {
-                    StringBuilder str = new StringBuilder();
-                    str.append( "Position XY : " ).append( ((Node) e.getSource()).getUserData() ).append( "\n" );
-                    text.appendText( str.toString() );
-                */
-                changeColor = !changeColor;
-            }
+                text.appendText(str.toString());
+              	});                
             changeColor = !changeColor;
-        }
-
+            }
         Scene scene = new Scene(root, 900, 900);
-       scene.getStylesheets().add(this.getClass().getResource("styles.css").toExternalForm());
-
+        scene.getStylesheets().add(this.getClass().getResource("styles.css").toExternalForm());
+        
         primaryStage.setTitle("Grid Pane Example");
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show();  
+        }
     }
-
+    
     public static char convCol(int col) {
         switch (col) {
             case 1:
