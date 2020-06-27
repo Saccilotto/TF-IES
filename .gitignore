@@ -4,6 +4,21 @@
 # IntelliJ project file
 .idea/
 
+# eclipse project file
+.classpath
+.project
+.metadata
+bin/
+tmp/
+*.lock
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
 
 # Log file
 *.log
