@@ -2,6 +2,11 @@ package main.java.model;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
+
+public enum Moves {
+
+}
 
 public class ChessBoard {
 	public static final boolean WHITE = true;
@@ -9,8 +14,8 @@ public class ChessBoard {
 
 	private Piece contents[][];
 	private boolean turn;
-	private Vector legalMoves;
-	public Vector allMoves;
+	private List legalMoves;
+	public List allMoves;
 
 	/* check info */
 	private Point blackKing;
@@ -27,7 +32,7 @@ public class ChessBoard {
 	public ChessBoard() {
 		contents = new Piece[8][8];
 		turn = WHITE;
-		allMoves = new Vector();
+		allMoves = new ArrayList();
 
 		/* Set up the board */
 		newBoard();
@@ -40,21 +45,20 @@ public class ChessBoard {
 		whiteQRookMoved = false;
 		blackKRookMoved = false;
 		blackQRookMoved = false;
-		legalMoves = new Vector();
+		legalMoves = new ArrayList<>();
 	}
 
 	/* constructor for making copy */
 	public ChessBoard(ChessBoard b)
 	{
 		int rank,file;
-		Point p=new Point();
+		Point p = new Point();
 		contents = new Piece[8][8];
 		turn = b.getTurn();
 		for (rank = 0;rank < 8;rank++)
 			for (file=0;file<8;file++)
 			{
-				p.rank = rank;
-				p.file = file;
+				p.setLocation( rank, file);
 				if (b.isOccupied(p))
 					contents[rank][file] = b.getPiece(p);
 			}
@@ -70,7 +74,7 @@ public class ChessBoard {
 		blackQRookMoved = b.blackQRookMoved;
 		
 		/* copy the moves vector */
-		allMoves = new Vector();
+		//allMoves = new Vector();
 		Enumeration enum = b.allMoves.elements();
 		while (enum.hasMoreElements())
 			allMoves.addElement(enum.nextElement());
