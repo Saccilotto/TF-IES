@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Vector;
 
+import main.java.logic.Move;
+
 public class Queen extends Piece {
 
 	public Queen(boolean c) {

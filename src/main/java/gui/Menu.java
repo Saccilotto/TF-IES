@@ -1,19 +1,20 @@
 package main.java.gui;
 
-import javafx.geometry.Insets;
+import java.awt.Button;
+import java.awt.Font;
+import java.awt.Insets;
+
+import org.w3c.dom.Text;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 public class Menu {
 
 	private static Menu instance;
-
 	private Scene scene;
 
 	public Menu() {
@@ -31,7 +32,7 @@ public class Menu {
 
 		// Edicao da caixa horizontal de texto:
 		hbText.setAlignment(Pos.TOP_CENTER);
-		Text entrada = new Text("Bem Vindo à Chess Battles!");
+		Text entrada = new Text("Bem Vindo ï¿½ Chess Battles!");
 		entrada.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 35));
 		hbText.getChildren().add(entrada);
 		root.getChildren().add(hbText);

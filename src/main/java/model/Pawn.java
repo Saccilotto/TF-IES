@@ -2,6 +2,8 @@ package main.java.model;
 
 import java.util.Vector;
 
+import main.java.logic.Move;
+
 public class Pawn extends Piece {
 	public Pawn(boolean c) {
 		super(c);

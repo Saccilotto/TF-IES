@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.java.gui.Jogo;
+import main.java.logic.Move;
 
 public class King extends Piece {
 
@@ -41,4 +42,5 @@ public class King extends Piece {
 				}
 		return v;
 	}
+
 }

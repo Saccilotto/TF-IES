@@ -2,6 +2,8 @@ package main.java.model;
 
 import java.util.Vector;
 
+import main.java.logic.Move;
+
 public class Bishop extends Piece {
 	public Bishop(boolean c) {
 		super(c);

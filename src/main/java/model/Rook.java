@@ -5,6 +5,8 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.util.Vector;
 
+import main.java.logic.Move;
+
 public class Rook extends Piece {
 	public Rook(boolean c) {
 		super(c);

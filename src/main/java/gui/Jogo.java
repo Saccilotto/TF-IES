@@ -12,12 +12,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import main.java.model.Tabuleiro;
 
 public class Jogo {
 
 	private static Jogo instance;
-
-	private Scene scene;
+	private Tabuleiro t;
+	private private Scene scene;
 
 	public Jogo() {
 		BorderPane pane = new BorderPane();
@@ -54,6 +55,15 @@ public class Jogo {
 		pane.setCenter(root);
 
 		this.scene = new Scene(pane);
+	}
+
+	public void setTabuleiro() {
+		// t = new Tabuleiro();
+
+	}
+
+	public Tabuleiro getTabuleiro() {
+		return t;
 	}
 
 	public Scene getScene() {

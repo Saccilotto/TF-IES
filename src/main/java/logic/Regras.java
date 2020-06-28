@@ -1,89 +1,25 @@
-package main.java.model;
+package main.java.logic;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
-import main.java.logic.Move;
+import main.java.model.Bishop;
+import main.java.model.ChessBoard;
+import main.java.model.Knight;
+import main.java.model.Piece;
+import main.java.model.Queen;
+import main.java.model.Rook;
+import main.java.model.*;
 
-public class ChessBoard {
-	public static final boolean WHITE = true;
-	public static final boolean BLACK = false;
+public class Regras {
+	private static Regras instance;
+	private Tabuleiro t;
+	private Regras r;
 
-	private Piece contents[][];
-	private boolean turn;
-	private List legalMoves;
-	public List allMoves;
+	public Regras() {
 
-	/* check info */
-	private Point blackKing;
-	private Point whiteKing;
-
-	/* Castling info */
-	public boolean whiteKingMoved;
-	public boolean blackKingMoved;
-	public boolean whiteKRookMoved;
-	public boolean whiteQRookMoved;
-	public boolean blackKRookMoved;
-	public boolean blackQRookMoved;
-
-	public ChessBoard() {
-		contents = new Piece[8][8];
-		turn = WHITE;
-		allMoves = new ArrayList();
-
-		/* Set up the board */
-		newBoard();
-
-		whiteKing = new Point(0, 4);
-		blackKing = new Point(7, 4);
-		whiteKingMoved = false;
-		blackKingMoved = false;
-		whiteKRookMoved = false;
-		whiteQRookMoved = false;
-		blackKRookMoved = false;
-		blackQRookMoved = false;
-		legalMoves = new ArrayList<>();
-	}
-
-	/* constructor for making copy */
-	public ChessBoard(ChessBoard b)
-	{
-		int rank,file;
-		Point p = new Point();
-		contents = new Piece[8][8];
-		turn = b.getTurn();
-		for (rank = 0;rank < 8;rank++)
-			for (file=0;file<8;file++)
-			{
-				p.setLocation( rank, file);
-				if (b.isOccupied(p))
-					contents[rank][file] = b.getPiece(p);
-			}
-		whiteKing = b.getKing(WHITE);
-		blackKing = b.getKing(BLACK);
-		
-		/* Castling info */
-		whiteKingMoved = b.whiteKingMoved;
-		whiteKRookMoved = b.whiteKRookMoved;
-		whiteQRookMoved = b.whiteQRookMoved;
-		blackKingMoved = b.blackKingMoved;
-		blackKRookMoved = b.blackKRookMoved;
-		blackQRookMoved = b.blackQRookMoved;
-		
-		/* copy the moves vector */
-		//allMoves = new Vector();
-		Enumeration enum = b.allMoves.elements();
-		while (enum.hasMoreElements())
-			allMoves.addElement(enum.nextElement());
-		
-		/* copy the legal moves vector */
-		legalMoves = new Vector();
-		enum = b.legalMoves.elements();
-		while (enum.hasMoreElements())
-			legalMoves.addElement(enum.nextElement());
-		
-		
 	}
 
 	public void findAllLegalMoves()
@@ -122,10 +58,10 @@ public class ChessBoard {
 		Enumeration enum;
 		Move m;
 		
-		newBoard();
+		t.newBoard();
 		if (!allMoves.isEmpty())
 		{
-			allMoves.removeElementAt(allMoves.size()-1);
+			r.allMoves.removeElementAt(allMoves.size()-1);
 			enum = allMoves.elements();
 			while (enum.hasMoreElements())
 				v.addElement(enum.nextElement());
@@ -139,42 +75,6 @@ public class ChessBoard {
 				
 		}
 		allMoves = v;
-	}
-
-	public void newBoard() {
-		int i;
-		/* erase pieces from middle */
-		int rank, file;
-		for (rank = 2; rank < 6; rank++)
-			for (file = 0; file < 8; file++)
-				contents[rank][file] = null;
-
-		/* pawns */
-		for (i = 0; i < 8; i++) {
-			contents[1][i] = new Pawn(WHITE);
-			contents[6][i] = new Pawn(BLACK);
-		}
-
-		contents[0][0] = new Rook(WHITE);
-		contents[0][1] = new Knight(WHITE);
-		contents[0][2] = new Bishop(WHITE);
-		contents[0][3] = new Queen(WHITE);
-		contents[0][4] = new King(WHITE);
-		contents[0][5] = new Bishop(WHITE);
-		contents[0][6] = new Knight(WHITE);
-		contents[0][7] = new Rook(WHITE);
-
-		contents[7][0] = new Rook(BLACK);
-		contents[7][1] = new Knight(BLACK);
-		contents[7][2] = new Bishop(BLACK);
-		contents[7][3] = new Queen(BLACK);
-		contents[7][4] = new King(BLACK);
-		contents[7][5] = new Bishop(BLACK);
-		contents[7][6] = new Knight(BLACK);
-		contents[7][7] = new Rook(BLACK);
-
-		turn = WHITE;
-
 	}
 
 	public boolean getTurn() {
@@ -547,4 +447,4 @@ public class ChessBoard {
 		return (white > black);
 	}
 
-}
+}}
