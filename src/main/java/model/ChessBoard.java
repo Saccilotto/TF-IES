@@ -8,8 +8,7 @@ import main.java.logic.Move;
 
 public class ChessBoard {
 	public static final boolean WHITE = true;
-	public static final boolean BLACK = false;
-
+	public static final boolean BLACK = false;P
 	private Piece contents[][];
 	private boolean turn;
 	private List legalMoves;
