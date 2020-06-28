@@ -60,7 +60,7 @@ public class Jogo {
 			root.getRowConstraints().add(new RowConstraints(5, Control.TTL_DONT_CACHE, Double.POSITIVE_INFINITY,
 					Priority.ALWAYS, VPos.CENTER, true));
 		}
-
+		Tabuleiro tbJogo = new Tabuleiro(root);
 		pane.setCenterShape(true);
 		pane.setCenter(root);
 
@@ -68,9 +68,7 @@ public class Jogo {
 	}
 
 	public void setTabuleiro() {
-		// t = new Tabuleiro();
-
-	}
+	// t = new Tabuleiro();
 
 	public Tabuleiro getTabuleiro() {
 		return t;

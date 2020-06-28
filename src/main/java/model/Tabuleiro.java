@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javafx.scene.layout.GridPane;
+import javax.lang.model.type.NoType;
 
 import main.java.logic.Move;
 import main.java.logic.Regras;
@@ -30,8 +32,11 @@ public class Tabuleiro {
 	public boolean blackKRookMoved;
 	public boolean blackQRookMoved;
 
-	public Tabuleiro() {
-		contents = new Piece[8][8];
+	public Tabuleiro(GridPane e) {
+		// contents = new Piece[8][8];
+		// Pegar dimensoes da gripdane e passar para contents
+		// contents = e.get;
+
 		turn = WHITE;
 		allMoves = new ArrayList<>();
 
@@ -396,7 +401,7 @@ public class Tabuleiro {
 	/* Does not check for checks in the path */
 	public boolean canCastle(boolean t, char side) {
 		boolean value = true;
-		ChessBoard temp;
+		Tabuleiro temp;
 
 		if (t == WHITE && side == 'K') {
 			if (whiteKingMoved || whiteKRookMoved || isOccupied(new Point(0, 5)) || isOccupied(new Point(0, 6)))
@@ -494,7 +499,7 @@ public class Tabuleiro {
 		/* Recursive case */
 		else
 		{
-			ChessBoard copy = new ChessBoard(this);
+			Tabuleiro copy = new Tabuleiro(this);
 			
 			/* Get the rating for just this move */
 			int nominal = rateMove(m,0);
