@@ -60,7 +60,6 @@ public class Jogo {
 		hbBut.getChildren().add(butSair);
 		hbBut.getChildren().add(butVoltarMenu);
 
-		setGrid(root);
 		// pane.setCenterShape(true);
 		pane.setTop(hbBut);
 		pane.setCenter(root);
