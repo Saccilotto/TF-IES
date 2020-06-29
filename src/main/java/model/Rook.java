@@ -14,7 +14,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	public Vector getLegalMoves(Point from, ChessBoard b) {
+	public List getLegalMoves(Point from, ChessBoard b) {
 
 		Vector v = new Vector();
 		int dx, dy;

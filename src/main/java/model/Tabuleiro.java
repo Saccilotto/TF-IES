@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Vector;
 import javafx.scene.layout.GridPane;
 import javax.lang.model.type.NoType;
+
 import main.java.logic.Move;
 import main.java.logic.Regras;
 
@@ -146,7 +147,7 @@ public class Tabuleiro {
 			legalMoves.clear();
 		for (rank = 0; rank < 8; rank++)
 			for (file = 0; file < 8; file++) {
-				temp.rank = rank;
+				temp. = rank;
 				temp.file = file;
 				if (isOccupied(temp) && getPiece(temp).getColor() == turn) {
 					v = contents[rank][file].getLegalMoves(temp, this);
@@ -436,7 +437,7 @@ public class Tabuleiro {
 		return legalMoves;
 	}
 
-	public List<> getBestMoves(int depth)
+	public List<> getBestMoves(int depth){
 	{
 		
 		List<> v = new ArrayList<>();

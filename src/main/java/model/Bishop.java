@@ -5,12 +5,13 @@ import java.util.Vector;
 import main.java.logic.Move;
 
 public class Bishop extends Piece {
+
 	public Bishop(boolean c) {
 		super(c);
 		setValue(3);
 	}
 
-	public Vector getLegalMoves(Point from, ChessBoard b) {
+	public List getLegalMoves(Point from, ChessBoard b) {
 
 		Vector v = new Vector();
 		int dx, dy;
