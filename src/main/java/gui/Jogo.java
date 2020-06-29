@@ -14,23 +14,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
-import main.java.model.Tabuleiro;
 
 public class Jogo {
-
-	private Tabuleiro tab;
-	private GridPane grid;
 
 	private static Jogo instance;
 	private Scene scene;
 
-	/*
-	 * used to make sure the timer doesn't start two threads for the same move
-	 * 
-	 * private boolean thinking;
-	 * 
-	 * For getting promotions private Move tempMove;
-	 */
 	public Jogo() {
 		BorderPane pane = new BorderPane();
 		pane.autosize();
@@ -72,23 +61,11 @@ public class Jogo {
 		hbBut.getChildren().add(butVoltarMenu);
 
 		setGrid(root);
-		// setTabuleiro(tab);
 		// pane.setCenterShape(true);
 		pane.setTop(hbBut);
 		pane.setCenter(root);
 
 		this.scene = new Scene(pane);
-	}
-
-	public void setGrid(GridPane grid) {
-		this.grid = grid;
-	}
-
-	/*
-	 * public void setTabuleiro(Tabuleiro tab) { this.tab = new Tabuleiro(grid); }
-	 */
-	public Tabuleiro getTabuleiro() {
-		return tab;
 	}
 
 	public Scene getScene() {
