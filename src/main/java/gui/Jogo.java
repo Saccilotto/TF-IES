@@ -6,9 +6,11 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
@@ -60,6 +62,14 @@ public class Jogo {
 					Priority.ALWAYS, VPos.CENTER, true));
 		}
 
+		HBox hbBut = new HBox();
+		hbBut.setSpacing(20);
+		Button butVoltarMenu = new Button("Voltar para o menu");
+		Button butSair = new Button("Sair");
+		butVoltarMenu.setOnAction(e -> Jogo.closeJogo();
+		butSair.setOnAction(e -> JanelaFX.close());
+		hbBut.getChildren().add(butSair);
+
 		setGrid(root);
 		setTabuleiro(tab);
 		pane.setCenterShape(true);
@@ -70,6 +80,10 @@ public class Jogo {
 
 	public void setGrid(GridPane grid) {
 		this.grid = grid;
+	}
+
+	public static void closeJogo() {
+		.close();
 	}
 
 	public void setTabuleiro(Tabuleiro tab) {
