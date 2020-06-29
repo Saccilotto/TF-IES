@@ -34,6 +34,7 @@ public class Tabuleiro {
 
 	public Tabuleiro(GridPane e) {
 		// contents = new Piece[8][8];
+
 		// Pegar dimensoes da gripdane e passar para contents
 		// contents = e.get;
 

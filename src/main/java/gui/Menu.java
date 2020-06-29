@@ -1,16 +1,16 @@
 package main.java.gui;
 
-import java.awt.Button;
-import java.awt.Font;
-import java.awt.Insets;
+//import org.w3c.dom.Text;
 
-import org.w3c.dom.Text;
-
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 public class Menu {
 
