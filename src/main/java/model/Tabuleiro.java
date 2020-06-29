@@ -3,10 +3,10 @@ package main.java.model;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import javafx.scene.layout.GridPane;
 import javax.lang.model.type.NoType;
-
 import main.java.logic.Move;
 import main.java.logic.Regras;
 
@@ -17,6 +17,7 @@ public class Tabuleiro {
 	private Piece contents[][];
 	private boolean turn;
 	private Tabuleiro t;
+	private Piece peca;
 	private List legalMoves;
 	public List allMoves;
 
@@ -33,10 +34,10 @@ public class Tabuleiro {
 	public boolean blackQRookMoved;
 
 	public Tabuleiro(GridPane e) {
-		// contents = new Piece[8][8];
-
-		// Pegar dimensoes da gripdane e passar para contents
-		// contents = e.get;
+		// pega as dimensoes da Gridpane e aloca em uma matriz
+		int x = (int) e.getLayoutX();
+		int y = (int) e.getLayoutY();
+		contents = new Piece[x][y];
 
 		turn = WHITE;
 		allMoves = new ArrayList<>();
@@ -81,19 +82,18 @@ public class Tabuleiro {
 		blackKRookMoved = t.blackKRookMoved;
 		blackQRookMoved = t.blackQRookMoved;
 		
+
 		/* copy the moves vector */
-		//allMoves = new Vector();
-		Enumeration enum = t.allMoves.elements();
+		allMoves = new ArrayList<>();
+		Enumeration enum = b.allMoves.elements();
 		while (enum.hasMoreElements())
 			allMoves.addElement(enum.nextElement());
 		
 		/* copy the legal moves vector */
 		legalMoves = new Vector();
-		enum = t.legalMoves.elements();
+		enum = b.legalMoves.elements();
 		while (enum.hasMoreElements())
 			legalMoves.addElement(enum.nextElement());
-		
-		
 	}
 
 	public void newBoard() {
@@ -139,7 +139,7 @@ public class Tabuleiro {
 	public void findAllLegalMoves() {
 		int rank, file;
 		Point temp = new Point();
-		Vector v;
+		Map v;
 		// Enumeration enum;
 		Move m;
 		if (peca.getLegalMoves() != null)
