@@ -10,7 +10,7 @@ public class Bishop extends Piece {
 		setValue(3);
 	}
 
-	public Vector getLegalMoves(Point from, ChessBoard b) {
+	public Vector getLegalMoves(Point from, Tabuleiro b) {
 
 		Vector v = new Vector();
 		int dx, dy;
