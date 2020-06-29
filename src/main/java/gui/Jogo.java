@@ -72,7 +72,7 @@ public class Jogo {
 		hbBut.getChildren().add(butVoltarMenu);
 
 		setGrid(root);
-		setTabuleiro(tab);
+		// setTabuleiro(tab);
 		// pane.setCenterShape(true);
 		pane.setTop(hbBut);
 		pane.setCenter(root);
@@ -84,10 +84,9 @@ public class Jogo {
 		this.grid = grid;
 	}
 
-	public void setTabuleiro(Tabuleiro tab) {
-		this.tab = new Tabuleiro(grid);
-	}
-
+	/*
+	 * public void setTabuleiro(Tabuleiro tab) { this.tab = new Tabuleiro(grid); }
+	 */
 	public Tabuleiro getTabuleiro() {
 		return tab;
 	}
@@ -103,59 +102,4 @@ public class Jogo {
 
 		return instance;
 	}
-
-	/*
-	 * // Once it is determined that is time for the AI to make a move private void
-	 * playAI() { List<> v; // Random Play if ((tab.getTurn() &&
-	 * whiteCh.getSelectedItem().equals("Random")) || (!tab.getTurn() &&
-	 * blackCh.getSelectedItem().equals("Random"))) v = tab.getAllLegalMoves();
-	 * 
-	 * // Search moves to depth else if (tab.getTurn() && whiteCh.getSelectedIndex()
-	 * > 1) v = tab.getBestMoves(whiteCh.getSelectedIndex() - 2); else if
-	 * (!tab.getTurn() && blackCh.getSelectedIndex() > 1) v =
-	 * tab.getBestMoves(blackCh.getSelectedIndex() - 2);
-	 * 
-	 * else return;
-	 * 
-	 * Move m = (Move) v.getIndex((int) (Math.random() * v.size())); //Automatic
-	 * promotion to queen tab.makeMove(m); readyNextMove();
-	 * 
-	 * }
-	 * 
-	 * /* public void moveHandler(Move m) { if (isPromoting) return;
-	 * 
-	 * // make a copy of the current board
-	 * 
-	 * if(tab.isLegal(m)&&tab.isCheckLegal(m))
-	 * 
-	 * {
-	 * 
-	 * // If a promotion is involved, the program needs to know what the promotion
-	 * is. // The program then exits, and picks up at promotionHandler
-	 * 
-	 * if (m.promotion) { tempMove = new Move(m.from, m.to);
-	 * messageLbl.setText("Enter 'Q','R','B', or 'N'"); messageLbl.repaint();
-	 * isPromoting = true; }
-	 * 
-	 * // all other moves else { board.makeMove(m); readyNextMove();
-	 * 
-	 * } }else messageLbl.setText(m.getMessage()); }
-	 * 
-	 * public void readyNextMove() { tab.findAllLegalMoves();
-	 * 
-	 * 
-	 * // I don't know why this is necessary, but the program keeps trying to shrink
-	 * //this label
-	 * 
-	 * messageLbl.setSize(120, 20); canvas.repaint(50); if
-	 * (tab.getAllLegalMoves().isEmpty()) { if (tab.isInCheck(tab.getTurn()))
-	 * messageLbl.setText("Checkmate!"); else messageLbl.setText("Stalemate!");
-	 * timer.suspend(); } else if (tab.isInCheck(tab.getTurn()))
-	 * messageLbl.setText("Check"); else if (tab.getTurn())
-	 * messageLbl.setText("white's move..."); else
-	 * messageLbl.setText("black's move...");
-	 * 
-	 * }
-	 */
-
 }
