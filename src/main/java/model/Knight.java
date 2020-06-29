@@ -12,7 +12,6 @@ public class Knight extends Piece {
 		setValue(3);
 	}
 
-	@Override
 	public Vector getLegalMoves(Point from, ChessBoard b) {
 		Vector v = new Vector();
 		int dx, dy;

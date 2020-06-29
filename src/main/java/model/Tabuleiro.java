@@ -11,16 +11,18 @@ import javax.lang.model.type.NoType;
 import main.java.logic.Move;
 import main.java.logic.Regras;
 
+import java.awt.*;
+import java.util.*;
+
 public class Tabuleiro {
+
 	public static final boolean WHITE = true;
 	public static final boolean BLACK = false;
 
 	private Piece contents[][];
 	private boolean turn;
-	private Tabuleiro t;
-	private Piece peca;
-	private List legalMoves;
-	public List allMoves;
+	private Vector legalMoves;
+	public Vector allMoves;
 
 	/* check info */
 	private Point blackKing;
@@ -34,14 +36,10 @@ public class Tabuleiro {
 	public boolean blackKRookMoved;
 	public boolean blackQRookMoved;
 
-	public Tabuleiro(GridPane e) {
-		// pega as dimensoes da Gridpane e aloca em uma matriz
-		int x = (int) e.getLayoutX();
-		int y = (int) e.getLayoutY();
-		contents = new Piece[x][y];
-
+	public Tabuleiro() {
+		contents = new Piece[8][8];
 		turn = WHITE;
-		allMoves = new ArrayList<>();
+		allMoves = new Vector();
 
 		/* Set up the board */
 		newBoard();
@@ -54,38 +52,37 @@ public class Tabuleiro {
 		whiteQRookMoved = false;
 		blackKRookMoved = false;
 		blackQRookMoved = false;
-		legalMoves = new ArrayList<>();
+		legalMoves = new Vector();
 	}
 
 	/* constructor for making copy */
-	public Tabuleiro(Tabuleiro t) {
-	this.t = t;
+	public Tabuleiro(Tabuleiro b)
 	{
 		int rank,file;
-		Point p = new Point();
+		Point p=new Point();
 		contents = new Piece[8][8];
-		turn = t.getTurn();
+		turn = b.getTurn();
 		for (rank = 0;rank < 8;rank++)
 			for (file=0;file<8;file++)
 			{
-				p.setLocation( rank, file);
-				if (t.isOccupied(p))
-					contents[rank][file] = t.getPiece(p);
+				p.rank = rank;
+				p.file = file;
+				if (b.isOccupied(p))
+					contents[rank][file] = b.getPiece(p);
 			}
-		whiteKing = t.getKing(WHITE);
-		blackKing = t.getKing(BLACK);
+		whiteKing = b.getKing(WHITE);
+		blackKing = b.getKing(BLACK);
 		
 		/* Castling info */
-		whiteKingMoved = t.whiteKingMoved;
-		whiteKRookMoved = t.whiteKRookMoved;
-		whiteQRookMoved = t.whiteQRookMoved;
-		blackKingMoved = t.blackKingMoved;
-		blackKRookMoved = t.blackKRookMoved;
-		blackQRookMoved = t.blackQRookMoved;
+		whiteKingMoved = b.whiteKingMoved;
+		whiteKRookMoved = b.whiteKRookMoved;
+		whiteQRookMoved = b.whiteQRookMoved;
+		blackKingMoved = b.blackKingMoved;
+		blackKRookMoved = b.blackKRookMoved;
+		blackQRookMoved = b.blackQRookMoved;
 		
-
 		/* copy the moves vector */
-		allMoves = new ArrayList<>();
+		allMoves = new Vector();
 		Enumeration enum = b.allMoves.elements();
 		while (enum.hasMoreElements())
 			allMoves.addElement(enum.nextElement());
@@ -95,6 +92,63 @@ public class Tabuleiro {
 		enum = b.legalMoves.elements();
 		while (enum.hasMoreElements())
 			legalMoves.addElement(enum.nextElement());
+		
+		
+	}
+
+	public void findAllLegalMoves()
+	{
+		int rank,file;
+		Point temp = new Point();
+		Vector v;
+		Enumeration enum;
+		Move m;
+		if (legalMoves != null)
+			legalMoves.removeAllElements();
+		for (rank = 0;rank < 8;rank++)
+			for (file = 0;file < 8; file++)
+			{
+				temp.rank = rank; temp.file = file;
+				if (isOccupied(temp) && getPiece(temp).getColor() == turn)
+				{
+					v = contents[rank][file].getLegalMoves(temp,this);
+					enum = v.elements();
+					while (enum.hasMoreElements())
+					{
+						m = (Move) enum.nextElement();
+						if (isCheckLegal(m))
+							legalMoves.addElement(m);
+					}
+						
+				}
+			}
+	}
+
+	public void takeBackMove()
+	{
+		/* This function clears the board and starts over */
+		/* Not the best way, but easy */
+		Vector v= new Vector();
+		Enumeration enum;
+		Move m;
+		
+		newBoard();
+		if (!allMoves.isEmpty())
+		{
+			allMoves.removeElementAt(allMoves.size()-1);
+			enum = allMoves.elements();
+			while (enum.hasMoreElements())
+				v.addElement(enum.nextElement());
+
+			/* This is necessary because makeMove adds the moves onto the vector */
+			allMoves.removeAllElements();
+			
+			enum = v.elements();	
+			while (enum.hasMoreElements())
+				makeMove((Move)enum.nextElement());
+				
+		}
+		allMoves = v;
 	}
 
 	public void newBoard() {
@@ -133,62 +187,6 @@ public class Tabuleiro {
 
 	}
 
-	public List getLegalMoves() {
-		return legalMoves;
-	}
-
-	public void findAllLegalMoves() {
-		int rank, file;
-		Point temp = new Point();
-		Map v;
-		// Enumeration enum;
-		Move m;
-		if (peca.getLegalMoves() != null)
-			legalMoves.clear();
-		for (rank = 0; rank < 8; rank++)
-			for (file = 0; file < 8; file++) {
-				temp. = rank;
-				temp.file = file;
-				if (isOccupied(temp) && getPiece(temp).getColor() == turn) {
-					v = contents[rank][file].getLegalMoves(temp, this);
-					m = v.elements();
-					while (m.hasMoreElements()) {
-						m = (Move) m.nextElement();
-						if (isCheckLegal(m))
-							legalMoves.addElement(m);
-					}
-
-				}
-			}
-	}
-
-	public void takeBackMove()
-	{
-		/* This function clears the board and starts over */
-		/* Not the best way, but easy */
-		Vector v= new Vector();
-		Enumeration enum;
-		Move m;
-		
-		t.newBoard();
-		if (!allMoves.isEmpty())
-		{
-			r.allMoves.removeElementAt(allMoves.size()-1);
-			enum = allMoves.elements();
-			while (enum.hasMoreElements())
-				v.addElement(enum.nextElement());
-
-			/* This is necessary because makeMove adds the moves onto the vector */
-			allMoves.removeAllElements();
-			
-			enum = v.elements();	
-			while (enum.hasMoreElements())
-				makeMove((Move)enum.nextElement());
-				
-		}
-		allMoves = v;
-	}
-
 	public boolean getTurn() {
 		return turn;
 	}
@@ -203,7 +201,7 @@ public class Tabuleiro {
 
 	public boolean isLegal(Move m)
 	{
-		List<> v;
+		Vector v;
 		Enumeration enum;
 		boolean value = false;
 		Move temp;
@@ -317,7 +315,7 @@ public class Tabuleiro {
 
 	public boolean isCheckLegal(Move m) {
 		boolean returnValue = false;
-		Tabuleiro temp = new (this);
+		ChessBoard temp = new ChessBoard(this);
 		/* The function is simple if not castling */
 		if (m.getCastle() == (char) 0) {
 			temp.makeMove(m);
@@ -352,7 +350,7 @@ public class Tabuleiro {
 		if (allMoves.isEmpty())
 			return null;
 		else
-			return (Move) allMoves.get(allMoves.size() - 1);
+			return (Move) allMoves.elementAt(allMoves.size() - 1);
 	}
 
 	public Piece getPiece(Point p) {
@@ -403,7 +401,7 @@ public class Tabuleiro {
 	/* Does not check for checks in the path */
 	public boolean canCastle(boolean t, char side) {
 		boolean value = true;
-		Tabuleiro temp;
+		ChessBoard temp;
 
 		if (t == WHITE && side == 'K') {
 			if (whiteKingMoved || whiteKRookMoved || isOccupied(new Point(0, 5)) || isOccupied(new Point(0, 6)))
@@ -433,14 +431,14 @@ public class Tabuleiro {
 		return value;
 	}
 
-	public ArrayList<> getAllLegalMoves() {
+	public Vector getAllLegalMoves() {
 		return legalMoves;
 	}
 
-	public List<> getBestMoves(int depth){
+	public Vector getBestMoves(int depth)
 	{
 		
-		List<> v = new ArrayList<>();
+		Vector v = new Vector();
 		int ratings[];
 		ratings = new int[legalMoves.size()];
 		int index=0;
@@ -501,7 +499,7 @@ public class Tabuleiro {
 		/* Recursive case */
 		else
 		{
-			Tabuleiro copy = new Tabuleiro(this);
+			ChessBoard copy = new ChessBoard(this);
 			
 			/* Get the rating for just this move */
 			int nominal = rateMove(m,0);

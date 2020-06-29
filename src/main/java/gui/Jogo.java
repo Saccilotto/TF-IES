@@ -66,13 +66,15 @@ public class Jogo {
 		hbBut.setSpacing(20);
 		Button butVoltarMenu = new Button("Voltar para o menu");
 		Button butSair = new Button("Sair");
-		butVoltarMenu.setOnAction(e -> Jogo.closeJogo();
+		butVoltarMenu.setOnAction(e -> JanelaFX.setScene(Menu.getInstance().getScene()));
 		butSair.setOnAction(e -> JanelaFX.close());
 		hbBut.getChildren().add(butSair);
+		hbBut.getChildren().add(butVoltarMenu);
 
 		setGrid(root);
 		setTabuleiro(tab);
-		pane.setCenterShape(true);
+		// pane.setCenterShape(true);
+		pane.setTop(hbBut);
 		pane.setCenter(root);
 
 		this.scene = new Scene(pane);
@@ -80,10 +82,6 @@ public class Jogo {
 
 	public void setGrid(GridPane grid) {
 		this.grid = grid;
-	}
-
-	public static void closeJogo() {
-		.close();
 	}
 
 	public void setTabuleiro(Tabuleiro tab) {

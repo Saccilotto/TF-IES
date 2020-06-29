@@ -7,13 +7,13 @@ import java.util.Vector;
 import main.java.logic.Move;
 
 public class Queen extends Piece {
-
 	public Queen(boolean c) {
 		super(c);
 		setValue(9);
 	}
 
-	public Vector getLegalMoves(Point from, ChessBoard b) {
+	@Override
+	public Vector getLegalMoves(Point from, Tabuleiro b) {
 
 		Vector v = new Vector();
 		int dx, dy;
