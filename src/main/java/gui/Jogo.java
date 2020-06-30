@@ -1,18 +1,13 @@
 package main.java.gui;
 
-import java.util.ResourceBundle.Control;
-
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 
 public class Jogo {
@@ -20,51 +15,67 @@ public class Jogo {
 	private static Jogo instance;
 	private Scene scene;
 
-	public Jogo() {
-		BorderPane pane = new BorderPane();
-		pane.autosize();
-		pane.setPadding(new Insets(25, 25, 25, 25));
-		pane.setVisible(true);
-		pane.setStyle("-fx-background-color: BURLYWOOD; -fx-text-fill: BURLYWOOD;");
+	private final int sizeWidth = 90;
+	private final int sizeHeight = 90;
 
-		// Cria grid tabuleiro
-		GridPane root = new GridPane();
-		final int size = 8;
+	private String styleWhite = "white";
+	private String styleBlack = "gray";
+
+	private final int size = 8;
+
+	private GridPane tabuleiro;
+
+	private HBox getHeader() {
+		HBox hbox = new HBox();
+		hbox.setPadding(new Insets(15, 12, 15, 12));
+		hbox.setSpacing(10);
+		hbox.setStyle("-fx-background-color: #336699;");
+
+		Button buttonMenu = new Button("Voltar");
+		buttonMenu.setPrefSize(100, 20);
+		buttonMenu.setOnAction(event -> JanelaFX.setScene(Menu.getInstance().getScene()));
+
+		hbox.getChildren().addAll(buttonMenu);
+
+		return hbox;
+	}
+
+	private GridPane getTabuleiro() {
+		tabuleiro = new GridPane();
+		tabuleiro.setPadding(new Insets(5, 5, 5, 5));
+
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
 				StackPane square = new StackPane();
-				String color;
-				if ((row + col) % 2 == 0) {
-					color = "white";
-				} else {
-					color = "gray";
-				}
+				square.setPrefSize(sizeWidth, sizeHeight);
+
+				String color = ((row + col) % 2 == 0) ? styleWhite : styleBlack;
 				square.setStyle("-fx-background-color: " + color + ";");
-				root.add(square, col, row);
+				tabuleiro.add(square, col, row);
 			}
 		}
 
-		for (int i = 0; i < size; i++) {
-			root.getColumnConstraints().add(new ColumnConstraints(5, Control.TTL_DONT_CACHE, Double.POSITIVE_INFINITY,
-					Priority.ALWAYS, HPos.CENTER, true));
-			root.getRowConstraints().add(new RowConstraints(5, Control.TTL_DONT_CACHE, Double.POSITIVE_INFINITY,
-					Priority.ALWAYS, VPos.CENTER, true));
-		}
+		return tabuleiro;
+	}
 
-		HBox hbBut = new HBox();
-		hbBut.setSpacing(20);
-		Button butVoltarMenu = new Button("Voltar para o menu");
-		Button butSair = new Button("Sair");
-		butVoltarMenu.setOnAction(e -> JanelaFX.setScene(Menu.getInstance().getScene()));
-		butSair.setOnAction(e -> JanelaFX.close());
-		hbBut.getChildren().add(butSair);
-		hbBut.getChildren().add(butVoltarMenu);
+	// TODO Alterar para entidade piece
+	private void adicionarPeca(Image image, int row, int col) {
+		ImageView imageView = new ImageView(image);
 
-		// pane.setCenterShape(true);
-		pane.setTop(hbBut);
-		pane.setCenter(root);
+		imageView.setFitHeight(sizeHeight);
+		imageView.setFitWidth(sizeWidth);
 
-		this.scene = new Scene(pane);
+		this.tabuleiro.add(imageView, row, col);
+	}
+
+	public Jogo() {
+		BorderPane border = new BorderPane();
+		border.setStyle("-fx-background-color: BURLYWOOD; -fx-text-fill: BURLYWOOD;");
+
+		border.setTop(getHeader());
+		border.setCenter(getTabuleiro());
+
+		this.scene = new Scene(border, 730, 785);
 	}
 
 	public Scene getScene() {
@@ -78,4 +89,5 @@ public class Jogo {
 
 		return instance;
 	}
+
 }
