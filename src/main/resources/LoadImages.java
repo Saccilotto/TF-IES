@@ -1,25 +1,23 @@
 package main.resources;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javafx.scene.image.Image;
 
 public class LoadImages {
-	public static int count = 0;
 	private static LoadImages instance;
-	private String pack = new File("").getAbsolutePath() + ("\\Pieces");
+	private String dir = new File("").getAbsolutePath() + ("\\Pieces");
 	private Map<String, Image> imgs;
-	private boolean isWhite = true;
+	// private boolean isWhite = true;
 
 	public LoadImages() {
 		imgs = new HashMap<String, Image>();
-		LoadKing();
+		LoadPieces();
 	}
 
+	// retorna a instancia pra classe LoadImages.
 	public static LoadImages getInstance() {
 		if (instance == null) {
 			instance = new LoadImages();
@@ -27,58 +25,37 @@ public class LoadImages {
 		return instance;
 	}
 
-	// Adicona as imagens referentes a cada peca eliminada do jogo.
-	public Image LoadKing(boolean color) {
-		isWhite = color;
-		Image img;
-		String fil;
-		if (isWhite == true) {
-			fil = (pack + "\\KingB");
-			img = new Image(getClass().getResourceAsStream(fil + ".png"));
-		} else {
-			fil = (pack + "\\KingP");
-			img = new Image(getClass().getResourceAsStream(fil + ".png"));
-		}
-		/*
-		 * if (count < 32) { imgs.put(fil, img); }
-		 */
-		return img;
-	}
-
-	// Adicona as imagens referentes a peca
-	public List<Image> LoadKing() {
-		// isWhite = color;
-		int i = 0;
-		Image img1 = null;
-		Image img2 = null;
-		String fil;
-		String kb = "\\KingB";
-		String kp = "\\KingP";
-		while (i < 2) {
-			if (isWhite == true) {
-				fil = (pack + kb + ".png");
-				img1 = new Image(getClass().getResourceAsStream(fil));
-			} else {
-				fil = (pack + kp + ".png");
-				img2 = new Image(getClass().getResourceAsStream(fil));
-			}
-
-			if (count < 32) {
-				imgs.put(fil, img1);
-				imgs.put(fil, img2);
-			}
-			i++;
-		}
-		ArrayList<Image> lst = new ArrayList<Image>();
-		lst.add(img1);
-		lst.add(img2);
-
-		return lst;
-
-	}
-
+	// retorna o map imgs
 	public Map<String, Image> getImgs() {
 		return imgs;
 	}
 
+	// adiciona ao Map todas as imagens e seus nomes
+	public void LoadPieces() {
+		File fileDir = new File(dir);
+		File[] files = fileDir.listFiles();
+
+		String name = null;
+		Image img = null;
+		for (File f : files) {
+			name = f.getName() + ".png";
+			img = new Image(getClass().getResourceAsStream(name));
+
+			imgs.put(name, img);
+		}
+		/*
+		 * System.out.println(name); System.out.println(img); System.out.println(imgs);
+		 * 
+		 */
+	}
+
+	public Image getImagePiece(String nome, boolean branca) {
+		String color;
+		if (branca == true) {
+			color = "B";
+		} else {
+			color = "P";
+		}
+		return imgs.get(nome + color);
+	}
 }
