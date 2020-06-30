@@ -18,9 +18,16 @@ public class LoadImages {
 	public LoadImages() {
 		imgs = new HashMap<String, Image>();
 		LoadKing();
-
 	}
 
+	public static LoadImages getInstance() {
+		if (instance == null) {
+			instance = new LoadImages();
+		}
+		return instance;
+	}
+
+	// Adicona as imagens referentes a cada peca eliminada do jogo.
 	public Image LoadKing(boolean color) {
 		isWhite = color;
 		Image img;
@@ -38,20 +45,21 @@ public class LoadImages {
 		return img;
 	}
 
+	// Adicona as imagens referentes a peca
 	public List<Image> LoadKing() {
 		// isWhite = color;
 		int i = 0;
 		Image img1 = null;
 		Image img2 = null;
 		String fil;
-		String kb = "KingB";
-		String kp = "KingP";
+		String kb = "\\KingB";
+		String kp = "\\KingP";
 		while (i < 2) {
 			if (isWhite == true) {
-				fil = (pack + "\\" + kb + ".png");
+				fil = (pack + kb + ".png");
 				img1 = new Image(getClass().getResourceAsStream(fil));
 			} else {
-				fil = (pack + "\\" + kp + ".png");
+				fil = (pack + kp + ".png");
 				img2 = new Image(getClass().getResourceAsStream(fil));
 			}
 
