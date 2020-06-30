@@ -19,6 +19,7 @@ public class JanelaFX extends Application {
 	private void setup() {
 		Icons icons = Icons.getInstance();
 
+		mainStage.setResizable(false);
 		mainStage.getIcons().add(icons.getMainIcon());
 		mainStage.setTitle("Chess Battles");
 
