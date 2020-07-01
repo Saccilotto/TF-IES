@@ -7,14 +7,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import main.java.model.Piece;
 
 public class Jogo implements MouseController {
 
@@ -65,7 +62,6 @@ public class Jogo implements MouseController {
 		board.addEventFilter(MouseEvent.MOUSE_DRAGGED, (EventHandler<MouseEvent>) (MouseEvent e) -> onMouseDragged(e));
 		board.addEventFilter(MouseEvent.MOUSE_RELEASED,
 				(EventHandler<MouseEvent>) (MouseEvent e) -> onMouseReleased(e));
-
 		return board;
 	}
 
@@ -81,21 +77,21 @@ public class Jogo implements MouseController {
 	}
 
 	// TODO Alterar para entidade piece
-	private void adicionarPeca(Piece e, int row, int col) {
-		Image aux = e.getPecaImg();
-		ImageView imageView = new ImageView(aux);
-
-		imageView.setFitHeight(sizeHeight);
-		imageView.setFitWidth(sizeWidth);
-
-		this.board.add(imageView, row, col);
-	}
-
-	private void getPos(Piece p) {
-		// int pieceRow = board.getRowIndex(p.getVPoint());
-		// int pieceCol = board.getColumnIndex(first);
-
-	}
+	/*
+	 * EDIT alterado e perdi o original private void adicionarPeca(Node e, int row,
+	 * int col) { LoadImages load = LoadImages.getInstance();
+	 * 
+	 * // Image aux = load.getImagePiece(e.getClass().getName(),false); ImageView
+	 * imageView = new ImageView(aux);
+	 * 
+	 * imageView.setFitHeight(sizeHeight); imageView.setFitWidth(sizeWidth);
+	 * 
+	 * this.board.add(imageView, row, col); }
+	 * 
+	 * private void getPos(Piece p) { // int pieceRow =
+	 * board.getRowIndex(p.getVPoint()); // int pieceCol =
+	 * board.getColumnIndex(first); }
+	 */
 
 	public Jogo() {
 		BorderPane border = new BorderPane();
@@ -150,9 +146,5 @@ public class Jogo implements MouseController {
 		}
 
 		System.out.println("MOUSE_PRESSED: " + coords.x + "/" + coords.y);
-	}
-
-	public GridPane getBoard() {
-		return board;
 	}
 }

@@ -39,10 +39,10 @@ abstract public class Piece {
 
 		Integer j;
 		Integer k;
-		/*
-		 * instancia ArrayList de Integer para fazer conversao alfabeto para numero para
-		 * adicionar valores int,int em point relativo as coordenadas
-		 */
+
+		// instancia ArrayList de Integer para fazer conversao alfabeto para numero para
+		// adicionar valores int,int em point relativo as coordenadas
+
 		List<Integer> convertidoFile = conv.charInteger(f.getRankChars());
 		for (char a : rank) {
 			for (char b : file) {
@@ -75,10 +75,8 @@ abstract public class Piece {
 
 	public abstract void drawPiece();
 
-	/*
-	 * getLegalMoves does not test for checks. Therefore, the calling statement
-	 * should filter the moves through an isCheck() function
-	 */
+	// getLegalMoves does not test for checks. Therefore, the calling statement
+	// should filter the moves through an isCheck() function
 
 	abstract public Vector<Point> getLegalMoves(Point from);
 

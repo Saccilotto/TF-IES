@@ -3,13 +3,11 @@ package main.java.logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.gui.Jogo;
-
 public class Info {
 
 	private static Info instance;
 
-	Jogo game = Jogo.getInstance();
+	// Jogo game = Jogo.getInstance();
 
 	private static String rankStr = "1,2,3,4,5,6,7,8,";
 	private static String fileStr = "a,b,c,d,e,f,g,h";
