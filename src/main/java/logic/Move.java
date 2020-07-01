@@ -26,6 +26,15 @@ public class Move {
 		return instance;
 	}
 
+	public String getPiece(Point p) {
+		// Piece peca = peca.get;
+		String s;
+		if ((p.getX() == rowFrom) && (p.getY() == colFrom)) {
+			s = peca.getClass().getName();
+		}
+		return peca
+	}
+
 	public void getonBoard() {
 	}
 

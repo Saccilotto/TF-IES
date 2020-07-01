@@ -91,6 +91,12 @@ public class Jogo implements MouseController {
 		this.board.add(imageView, row, col);
 	}
 
+	private void getPos(Piece p) {
+		// int pieceRow = board.getRowIndex(p.getVPoint());
+		// int pieceCol = board.getColumnIndex(first);
+
+	}
+
 	public Jogo() {
 		BorderPane border = new BorderPane();
 		border.setStyle("-fx-background-color: BURLYWOOD; -fx-text-fill: BURLYWOOD;");

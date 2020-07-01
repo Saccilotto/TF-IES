@@ -12,13 +12,14 @@ abstract public class Piece {
 	public final static boolean WHITE = true;
 	public final static boolean BLACK = false;
 
-	private Info f = Info.getInstance();
+	public Info f = Info.getInstance();
 	public Vector<String> vecStr;
 	public Vector<Point> vecPnt;
 
-	private Convert conv;
+	// False para brancas, true para pretas
 	private boolean color;
 	private int value;
+	private Convert conv;
 
 	public Piece(boolean c) {
 		List<Point> aux = setPoints(f.getRankChars(), f.getFileChars());
@@ -71,6 +72,8 @@ abstract public class Piece {
 	public abstract void adicionarPeca();
 
 	public abstract Image getPecaImg();
+
+	public abstract void drawPiece();
 
 	/*
 	 * getLegalMoves does not test for checks. Therefore, the calling statement
