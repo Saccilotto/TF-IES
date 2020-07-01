@@ -12,22 +12,19 @@ public class Move {
 
 	private static String rankStr = "1,2,3,4,5,6,7,8,";
 	private static String fileStr = "a,b,c,d,e,f,g,h";
-
+	private static int count = 1;
+	private boolean turn;
 	private List<Character> rankChars;
 	private List<Character> fileChars;
-
 	private List<String> coord;
 
 	public Move() {
+		// false para brancas true para pretas
+		setTurn();
 		setRank(rankChars);
 		setFile(fileChars);
 		setCasa();
 		setCoord(coord);
-
-		/*
-		 * System.out.println(rankChars); System.out.println(fileChars);
-		 * System.out.println(coord);
-		 */
 	}
 
 	// retorna a instancia pra classe Move.
@@ -41,6 +38,18 @@ public class Move {
 	/*
 	 * public getonBoard() { }
 	 */
+
+	public void setTurn() {
+		if (count % 2 != 0) {
+			turn = false;
+		} else {
+			turn = true;
+		}
+	}
+
+	public boolean getTurn() {
+		return turn;
+	}
 
 	public void setRank(List<Character> e) {
 		e = new ArrayList<Character>();

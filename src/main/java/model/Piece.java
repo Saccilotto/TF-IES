@@ -11,9 +11,11 @@ abstract public class Piece {
 	public final static boolean WHITE = true;
 	public final static boolean BLACK = false;
 
-	private Move m = Move.getInstance();
-	private Vector<String> vecStr;
-	private Vector<Point> vecPnt;
+	public Move m = Move.getInstance();
+
+	public Vector<String> vecStr;
+	public Vector<Point> vecPnt;
+
 	private Convert conv;
 	private boolean color;
 	private int value;
@@ -30,8 +32,6 @@ abstract public class Piece {
 	public List<Point> setPoints(List<Character> rank, List<Character> file) {
 		// instancia Arraylst de Point
 		List<Point> lst = new ArrayList<Point>();
-
-		;
 		int i;
 		int x;
 		int y;
@@ -64,8 +64,8 @@ abstract public class Piece {
 		return lst;
 	}
 
-	public void getPoints(List<Point> points) {
-
+	public Vector<Point> getVPoint() {
+		return vecPnt;
 	}
 
 	/*
@@ -88,18 +88,3 @@ abstract public class Piece {
 	}
 
 }
-
-/*
- * draw a piece given the lower left corner of the square abstract public void
- * drawPiece(int x, int y, Graphics g);
- * 
- * 
- * @Override public void drawPiece(int x, int y, Graphics g) { int[] X = { 10,
- * 20, 22, 22, 24, 25, 25, 24, 22, 20, 18, 17, 15, 13, 12, 10, 8, 6, 5, 5, 6, 8,
- * 8, 10 }; int[] Y = { 5, 5, 6, 10, 13, 15, 17, 18, 20, 20, 18, 22, 23, 22, 18,
- * 20, 20, 18, 17, 15, 13, 10, 6, 5 }; int i; for (i = 0; i < X.length; i++) {
- * X[i] += x; Y[i] = y - Y[i]; }
- * 
- * g.fillPolygon(X, Y, X.length); g.drawLine(x + 13, y - 25, x + 17, y - 25);
- * g.drawLine(x + 15, y - 27, x + 15, y - 23); }
- */
