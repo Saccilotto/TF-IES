@@ -1,16 +1,21 @@
 package main.java.gui;
 
+import java.awt.Point;
+
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
-public class Jogo {
+public class Jogo implements MouseController {
 
 	private static Jogo instance;
 	private Scene scene;
@@ -23,7 +28,7 @@ public class Jogo {
 
 	private final int size = 8;
 
-	private GridPane tabuleiro;
+	private GridPane board;
 
 	private HBox getHeader() {
 		HBox hbox = new HBox();
@@ -41,8 +46,8 @@ public class Jogo {
 	}
 
 	private GridPane getTabuleiro() {
-		tabuleiro = new GridPane();
-		tabuleiro.setPadding(new Insets(5, 5, 5, 5));
+		board = new GridPane();
+		board.setPadding(new Insets(5, 5, 5, 5));
 
 		for (int row = 0; row < size; row++) {
 			for (int col = 0; col < size; col++) {
@@ -51,11 +56,27 @@ public class Jogo {
 
 				String color = ((row + col) % 2 == 0) ? styleWhite : styleBlack;
 				square.setStyle("-fx-background-color: " + color + ";");
-				tabuleiro.add(square, col, row);
+				board.add(square, col, row);
 			}
 		}
 
-		return tabuleiro;
+		board.addEventFilter(MouseEvent.MOUSE_PRESSED, (EventHandler<MouseEvent>) (MouseEvent e) -> onMousePressed(e));
+		board.addEventFilter(MouseEvent.MOUSE_DRAGGED, (EventHandler<MouseEvent>) (MouseEvent e) -> onMouseDragged(e));
+		board.addEventFilter(MouseEvent.MOUSE_RELEASED,
+				(EventHandler<MouseEvent>) (MouseEvent e) -> onMouseReleased(e));
+
+		return board;
+	}
+
+	private Point getCoordBoard(MouseEvent e) {
+		for (Node node : board.getChildren()) {
+			if (node instanceof StackPane) {
+				if (node.getBoundsInParent().contains(e.getSceneX(), e.getSceneY())) {
+					return new Point(GridPane.getRowIndex(node), GridPane.getColumnIndex(node));
+				}
+			}
+		}
+		return null;
 	}
 
 	// TODO Alterar para entidade piece
@@ -65,7 +86,7 @@ public class Jogo {
 		imageView.setFitHeight(sizeHeight);
 		imageView.setFitWidth(sizeWidth);
 
-		this.tabuleiro.add(imageView, row, col);
+		this.board.add(imageView, row, col);
 	}
 
 	public Jogo() {
@@ -88,6 +109,39 @@ public class Jogo {
 		}
 
 		return instance;
+	}
+
+	@Override
+	public void onMouseReleased(MouseEvent event) {
+		Point coords = getCoordBoard(event);
+
+		if (coords == null) {
+			return;
+		}
+
+		System.out.println("MOUSE_RELEASED: " + coords.x + "/" + coords.y);
+	}
+
+	@Override
+	public void onMouseDragged(MouseEvent event) {
+		Point coords = getCoordBoard(event);
+
+		if (coords == null) {
+			return;
+		}
+
+		System.out.println("MOUSE_DRAGGED: " + coords.x + "/" + coords.y);
+	}
+
+	@Override
+	public void onMousePressed(MouseEvent event) {
+		Point coords = getCoordBoard(event);
+
+		if (coords == null) {
+			return;
+		}
+
+		System.out.println("MOUSE_PRESSED: " + coords.x + "/" + coords.y);
 	}
 
 }
