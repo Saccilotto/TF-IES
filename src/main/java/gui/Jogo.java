@@ -26,7 +26,7 @@ public class Jogo implements MouseController {
 	private String styleWhite = "white";
 	private String styleBlack = "gray";
 
-	private final int size = 8;
+	public final int size = 8;
 
 	private GridPane board;
 
