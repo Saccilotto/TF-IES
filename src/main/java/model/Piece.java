@@ -2,8 +2,6 @@ package main.java.model;
 
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
@@ -14,10 +12,9 @@ abstract public class Piece {
 	public final static boolean BLACK = false;
 
 	private Move m = Move.getInstance();
-	private IteratorConvert itera;
 	private Vector<String> vecStr;
 	private Vector<Point> vecPnt;
-
+	private Convert conv;
 	private boolean color;
 	private int value;
 
@@ -31,32 +28,40 @@ abstract public class Piece {
 	}
 
 	public List<Point> setPoints(List<Character> rank, List<Character> file) {
+		// instancia Arraylst de Point
 		List<Point> lst = new ArrayList<Point>();
 
-		List<Integer> lstInt = new LinkedList<Integer>();
-		Iterator<Integer> iter = lstInt.iterator();
+		;
+		int i;
+		int x;
+		int y;
 
+		Integer j;
+		Integer k;
+		/*
+		 * instancia ArrayList de Integer para fazer conversao alfabeto para numero para
+		 * adicionar valores int,int em point relativo as coordenadas
+		 */
+		List<Integer> convertidoFile = conv.charInteger(m.getRankChars());
 		for (char a : rank) {
 			for (char b : file) {
-				int auxC = Character.getNumericValue(a);
+				i = 0;
+				// Integer k= Integer.valueOf(a);
+				// adiciona os valores convertidos de chars para inteiros segundo a classe
+				// Conversor
+				j = convertidoFile.get(i);
+				// cast para de Integer para int referente a x(rank)
+				x = j.intValue();
+				// cast para de char para int referente a y(files)
+				y = Character.getNumericValue(b);
 
-				Integer i = null;
-				if (iter.hasNext()) {
-					i = iter.next();
-
-					// retorna os valores de chars como inteiros segundo a edicao em Iterator
-					i = Integer.valueOf(b);
-				}
-
-				int tipeI = i.intValue();
-				Point pt = new Point(auxC, tipeI);
+				Point pt = new Point(x, y);
 				lst.add(pt);
+
+				i++;
 			}
-
 		}
-
 		return lst;
-
 	}
 
 	public void getPoints(List<Point> points) {
@@ -67,6 +72,7 @@ abstract public class Piece {
 	 * getLegalMoves does not test for checks. Therefore, the calling statement
 	 * should filter the moves through an isCheck() function
 	 */
+
 	abstract public Vector<Point> getLegalMoves(Point from);
 
 	public boolean getColor() {

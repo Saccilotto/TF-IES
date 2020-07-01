@@ -10,8 +10,8 @@ public class Move {
 	private static Move instance;
 	Jogo game = Jogo.getInstance();
 
-	private static String fileStr = "a,b,c,d,e,f,g,h";
 	private static String rankStr = "1,2,3,4,5,6,7,8,";
+	private static String fileStr = "a,b,c,d,e,f,g,h";
 
 	private List<Character> rankChars;
 	private List<Character> fileChars;

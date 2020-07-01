@@ -1,9 +1,9 @@
 package main.java.model;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public interface Conversor {
 
-	void charInteger(LinkedList<Character> lst);
+	List<Integer> charInteger(List<Character> lst);
 
 }

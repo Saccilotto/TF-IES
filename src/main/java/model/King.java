@@ -1,19 +1,19 @@
 package main.java.model;
 
-import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Vector;
 
 import main.java.logic.Move;
 
 public class King extends Piece {
+
 	public King(boolean c) {
 		super(c);
 		setValue(1000);
 	}
 
 	@Override
-	public Vector getLegalMoves(Point from, Tabuleiro b) {
+	public Vector getLegalMoves(Point from) {
 		Vector v = new Vector();
 		int dx, dy;
 		Point tempPoint = new Point();
@@ -41,7 +41,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	public void drawPiece(int x, int y, Graphics g) {
+	public void drawPiece(int x, int y) {
 		int[] X = { 10, 20, 22, 22, 24, 25, 25, 24, 22, 20, 18, 17, 15, 13, 12, 10, 8, 6, 5, 5, 6, 8, 8, 10 };
 		int[] Y = { 5, 5, 6, 10, 13, 15, 17, 18, 20, 20, 18, 22, 23, 22, 18, 20, 20, 18, 17, 15, 13, 10, 6, 5 };
 		int i;
