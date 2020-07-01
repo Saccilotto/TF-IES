@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import main.java.logic.Move;
+import javafx.scene.image.Image;
+import main.java.logic.Info;
 
 abstract public class Piece {
 	public final static boolean WHITE = true;
 	public final static boolean BLACK = false;
 
-	public Move m = Move.getInstance();
-
+	private Info f = Info.getInstance();
 	public Vector<String> vecStr;
 	public Vector<Point> vecPnt;
 
@@ -21,9 +21,9 @@ abstract public class Piece {
 	private int value;
 
 	public Piece(boolean c) {
-		List<Point> aux = setPoints(m.getRankChars(), m.getFileChars());
+		List<Point> aux = setPoints(f.getRankChars(), f.getFileChars());
 		vecPnt = new Vector<Point>(aux);
-		vecStr = new Vector<String>(m.getCoord());
+		vecStr = new Vector<String>(f.getCoord());
 
 		color = c;
 		value = 0;
@@ -42,7 +42,7 @@ abstract public class Piece {
 		 * instancia ArrayList de Integer para fazer conversao alfabeto para numero para
 		 * adicionar valores int,int em point relativo as coordenadas
 		 */
-		List<Integer> convertidoFile = conv.charInteger(m.getRankChars());
+		List<Integer> convertidoFile = conv.charInteger(f.getRankChars());
 		for (char a : rank) {
 			for (char b : file) {
 				i = 0;
@@ -67,6 +67,10 @@ abstract public class Piece {
 	public Vector<Point> getVPoint() {
 		return vecPnt;
 	}
+
+	public abstract void adicionarPeca();
+
+	public abstract Image getPecaImg();
 
 	/*
 	 * getLegalMoves does not test for checks. Therefore, the calling statement

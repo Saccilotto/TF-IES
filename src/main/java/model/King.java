@@ -6,7 +6,6 @@ import java.util.Vector;
 import main.java.logic.Move;
 
 public class King extends Piece {
-	private static King instance;
 
 	public King(boolean c) {
 		super(c);
@@ -17,7 +16,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	public Vector<Move> getLegalMoves(Point from) {
+	public Vector<> getLegalMoves(Point from) {
 		Vector v = new Vector();
 		int dx, dy;
 		Point tempPoint = new Point();
@@ -26,22 +25,15 @@ public class King extends Piece {
 		if (getColor() == m.getTurn())
 			for (dx = -1; dx <= 1; dx++)
 				for (dy = -1; dy <= 1; dy++) {
-					tempPoint.file = from.file + dx;
-					tempPoint.rank = from.rank + dy;
+					tempPoint.x = from.x + dx;
+					tempPoint.y = from.y + dy;
 
-					if (!tempPoint.onBoard())
+					if (!tempPoint.getLocation() == m.getOnBoard())
 						;
 					else if (!(b.isOccupied(tempPoint)) || (b.getPiece(tempPoint).getColor() != getColor()))
 						v.addElement(new Move(from, tempPoint));
 				}
 		return v;
-	}
-
-	public static King getInstance() {
-		if (instance == null) {
-			instance = new King();
-		}
-		return instance;
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import main.java.model.Piece;
 
 public class Jogo implements MouseController {
 
@@ -45,7 +46,7 @@ public class Jogo implements MouseController {
 		return hbox;
 	}
 
-	private GridPane getTabuleiro() {
+	public GridPane getTabuleiro() {
 		board = new GridPane();
 		board.setPadding(new Insets(5, 5, 5, 5));
 
@@ -80,8 +81,9 @@ public class Jogo implements MouseController {
 	}
 
 	// TODO Alterar para entidade piece
-	private void adicionarPeca(Image image, int row, int col) {
-		ImageView imageView = new ImageView(image);
+	private void adicionarPeca(Piece e, int row, int col) {
+		Image aux = e.getPecaImg();
+		ImageView imageView = new ImageView(aux);
 
 		imageView.setFitHeight(sizeHeight);
 		imageView.setFitWidth(sizeWidth);
@@ -144,4 +146,7 @@ public class Jogo implements MouseController {
 		System.out.println("MOUSE_PRESSED: " + coords.x + "/" + coords.y);
 	}
 
+	public GridPane getBoard() {
+		return board;
+	}
 }
