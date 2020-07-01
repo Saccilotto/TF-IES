@@ -17,7 +17,7 @@ abstract public class Piece {
 	public Vector<Point> vecPnt;
 
 	// False para brancas, true para pretas
-	private boolean color;
+	public boolean color;
 	private int value;
 	private Convert conv;
 

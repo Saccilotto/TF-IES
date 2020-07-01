@@ -3,6 +3,7 @@ package main.java.model;
 import java.awt.Point;
 import java.util.Vector;
 
+import javafx.scene.image.Image;
 import main.java.logic.Info;
 import main.java.logic.Move;
 import main.resources.LoadImages;
@@ -32,17 +33,25 @@ public class King extends Piece {
 					tempPoint.x = from.x + dx;
 					tempPoint.y = from.y + dy;
 					// !tempPoint.getLocation() ==
+					String aux = mov.getPiece(tempPoint);
+					//if(aux.equals(anObject)) {
+						
+			
+					Piece temP = 
 					if (mov.isOccupied(tempPoint)) {
 						;
-					} else if (!(mov.isOccupied(tempPoint)) || (mov.getPiece(tempPoint).getColor() != getColor()))
+					} else if (!(mov.isOccupied(tempPoint))
+							|| (mov.getPiece(tempPoint) != mov.getPiece(tempPoint).getColor()))
 						v.addElement(new Move(from, tempPoint));
 				}
+		
 		return v;
 	}
 
 	@Override
 	public void drawPiece() {
-
+		Image img = load.getImagePiece("King", true);
+		//
 	}
 
 }
